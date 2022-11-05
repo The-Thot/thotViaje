@@ -9,8 +9,8 @@ class User {
   var _motivo;
   var _bornDate;
 
-  User(this._uid, this._name, this._email, this._password, this._motivo,
-      this._bornDate, this._genre);
+  User(this._uid, this._genre,  this._name, this._email, this._password, this._motivo,
+      this._bornDate );
 
   User.Empty();
 
