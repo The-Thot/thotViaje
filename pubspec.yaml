@@ -29,8 +29,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_rating_bar: ^4.0.1
   firebase_core: ^2.1.1
-  shared_preferences: 2.0.15
   intl: ^0.17.0
   flutter:
     sdk: flutter
@@ -45,6 +45,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.1.0
   cloud_firestore: ^4.0.3
+  accordion:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
