@@ -100,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
         if (_vacaciones) motivo = "$motivo Vacaciones";
 
         var user = User("",
-            _name.text, _email.text, _password.text,  motivo, _date, genre );
+            genre, _name.text, _email.text, _password.text,  motivo, _date );
         registerUser(user);
       } else {
         _showMsg("Las contraseñas no son iguales");
