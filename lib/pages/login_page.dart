@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:thot/users/user.dart';
 import 'package:thot/pages/home_page.dart';
+import 'package:thot/users/user.dart';
 import 'package:thot/pages/register_page.dart';
 import 'package:thot/repository/firebase_api.dart';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _email = TextEditingController();
   final _password = TextEditingController();
+  late bool _obscureText;
 
   final FirebaseApi _firebaseApi = FirebaseApi();
 
@@ -28,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState(){
     //_getUser();
     super.initState();
+    _obscureText = true;
   }
 
   _getUser() async{
@@ -58,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
       if(result == "network-request-failed"){_showMsg("!ops¡ al parecer no tienes conexión");}else{
         msg = "Bienvenido";
       //_showMsg("Correo o contraeña incorrecta");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home()));
       }
     }
   }
@@ -89,13 +92,39 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 16.0,
                 ),
-                TextFormField(
-                  controller: _password,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Contraseña"
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 1.0, right: 1.0, top: 15, bottom: 0),
+                  child: TextFormField(
+                    controller: _password,
+                    cursorColor: Colors.lightGreen,
+                    obscureText: _obscureText,
+                    decoration: InputDecoration(
+                        suffixIcon: CupertinoButton(
+                            child: Icon(
+                              _obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.lightGreen,
+                            ),
+                            onPressed: (){
+                              _obscureText = !_obscureText;
+                              setState(() {
+
+                              });
+                            }
+                        ),
+                        labelText: 'Contraseña',
+                        floatingLabelStyle: const TextStyle(
+                            color: Colors.lightGreen
+                        ),
+                        border: const OutlineInputBorder(),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.lightGreen)
+                        ),
+                        hintText: 'Ingrese su contraseña'),
                   ),
-                  keyboardType: TextInputType.text,),
+                ),
                 const SizedBox(
                   height: 16.0,
                 ),
