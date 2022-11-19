@@ -2,7 +2,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
+import 'package:thot/pages/new_place_page.dart';
 import '../Widgets/main_menu.dart';
+import 'package:thot/models/sitios.dart';
 
 
 // ignore: must_be_immutable
@@ -15,8 +17,9 @@ class PlaceView extends StatefulWidget {
 }
 
 class _PlaceViewState extends State<PlaceView> {
-  @override
   double _rating = 3.0;
+
+  @override
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,11 +92,7 @@ class _PlaceViewState extends State<PlaceView> {
                 header: const Text('Coordenadas de Ubicacion', style: TextStyle(fontSize: 18, color: Colors.white),),
                 content: Text(widget.site['ubicacion'])
             ),
-            AccordionSection(
-                header: const Text('Calificacion', style: TextStyle(fontSize: 18, color: Colors.white),),
-                content: Text(widget.site['rating']),
 
-            ),
         ]),
         const SizedBox(
           height: 15,
@@ -107,14 +106,13 @@ class _PlaceViewState extends State<PlaceView> {
           itemCount: 5,
           itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
           itemBuilder: (context, _) => const Icon(
-            Icons.star,
-            color: Colors.amber,
+            Icons.face,
+            color: Colors.greenAccent,
           ),
           onRatingUpdate: (rating) {
             _rating = rating;
           },
         ),
-
 
 
 

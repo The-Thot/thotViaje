@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../pages/login_page.dart';
 import '../pages/places_list.dart';
 import '../pages/home_page.dart';
+import '../pages/favorites_page.dart';
 
 Widget mainMenu(BuildContext context) {
   return Drawer(
@@ -50,12 +51,30 @@ Widget mainMenu(BuildContext context) {
           textColor: Colors.lightGreen,
           onTap: () {
            Navigator.push(context, MaterialPageRoute(builder: (context)=> const Places()));
-
           },
         ),
         const SizedBox(
           height: 3,
         ),
+
+        ListTile(
+          iconColor: Colors.lightGreen,
+          title: const Text('Mis Favoritos', style: TextStyle(fontSize: 15)),
+          leading: const Icon(Icons.star),
+          textColor: Colors.lightGreen,
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> const Favorites()));
+          },
+        ),
+        const SizedBox(
+        height: 3,
+        ),
+
+
+
+
+
+
 
         ListTile(
           iconColor: Colors.lightGreen,
