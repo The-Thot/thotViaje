@@ -36,6 +36,18 @@ class Sitios {
         _rating = json['rating'],
         _motivo = json['motivo'];
 
+  get id => _id;
+
+  set id(value) {
+    _id = value;
+  }
+
+  get motivo => _motivo;
+
+  set motivo(value) {
+    _motivo = value;
+  }
+
   get rating => _rating;
 
   set rating(value) {
@@ -76,17 +88,5 @@ class Sitios {
 
   set lugar(value) {
     _lugar = value;
-  }
-
-  get id => _id;
-
-  set id(value) {
-    _id = value;
-  }
-
-  get motivo => _motivo;
-
-  set motivo(value) {
-    _motivo = value;
   }
 }

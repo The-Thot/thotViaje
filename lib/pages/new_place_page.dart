@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:thot/models/sitios.dart';
 import 'package:thot/repository/firebase_api.dart';
 
+
 class NewPlacePage extends StatefulWidget {
   const NewPlacePage({Key? key}) : super(key: key);
 
@@ -60,7 +61,7 @@ class _NewPlacePageState extends State<NewPlacePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nuevo Destino"),
+        title: Text("Mis viajes"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -71,7 +72,7 @@ class _NewPlacePageState extends State<NewPlacePage> {
               TextFormField(
                 controller: _lugar,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Sitio'),
+                    border: OutlineInputBorder(), labelText: 'Lugar'),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
@@ -155,12 +156,12 @@ class _NewPlacePageState extends State<NewPlacePage> {
                 children: [
                   Expanded(
                     child: CheckboxListTile(
-                      title: const Text("Trabajo"),
-                      value: _trabajo,
-                      selected: _trabajo,
+                      title: const Text("Deportes"),
+                      value: _deportes,
+                      selected: _deportes,
                       onChanged: (bool? value) {
                         setState(() {
-                          _trabajo = value!;
+                          _deportes = value!;
                         });
                       },
                     ),
@@ -183,12 +184,12 @@ class _NewPlacePageState extends State<NewPlacePage> {
                 children: [
                   Expanded(
                     child: CheckboxListTile(
-                      title: const Text("Deportes"),
-                      value: _deportes,
-                      selected: _deportes,
+                      title: const Text("Trabajo"),
+                      value: _trabajo,
+                      selected: _trabajo,
                       onChanged: (bool? value) {
                         setState(() {
-                          _deportes = value!;
+                          _trabajo = value!;
                         });
                       },
                     ),

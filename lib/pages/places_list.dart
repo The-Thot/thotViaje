@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thot/pages/new_place_page.dart';
 import '../widgets/main_menu.dart';
@@ -11,64 +12,47 @@ class Places extends StatefulWidget {
   State<Places> createState() => _PlacesState();
 }
 
+
+
 class _PlacesState extends State<Places> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppbar(),
+      appBar: AppBar(
+        title: const Text('Lugares'),
+      ),
       drawer: mainMenu(context),
-      body: placesBody(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-          Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const NewPlacePage()));
-          },
-          tooltip: 'Nuevo destino',
-          child: const Icon(Icons.add_location_alt_rounded)),
-    );
-
-  }
-
-  myAppbar() {
-    return AppBar(
-      backgroundColor: Colors.lightGreen,
-      centerTitle: true,
-      title: const Text('Lugares', style: TextStyle(color: Colors.white),),
-    );
-  }
-
-  placesBody() {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("sitios").snapshots(),
-      builder: (context, snapshot){
-        if(snapshot.hasError) {return const Text('Un Error Ha Ocurrido!', style: TextStyle(fontSize: 18, color: Colors.lightGreen),);}
-        if(!snapshot.hasData) return const Text('Cargando Información');
-          return ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              itemCount: snapshot.data!.docs.length * 2,
-              itemBuilder: (context, index){
-                if(index.isOdd) return const Divider();
-                int indexsite = index ~/ 2;
-                QueryDocumentSnapshot site = snapshot.data!.docs[indexsite];
-                return myItem(site);
-              }
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child:StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection("users")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .collection("sitios")
+          .snapshots(),
+        builder: (context, snapshot){
+          if(!snapshot.hasData) return const Text('Loading');
+            return ListView.builder(
+              itemCount: snapshot.data?.docs.length,
+              itemBuilder: (contest, index){
+              QueryDocumentSnapshot viaje = snapshot.data!.docs[index];
+              return Card(
+                child: ListTile(
+                  title: Text(viaje['lugar']),
+                  subtitle: Text(viaje['ciudad']),
+                )
+              );
+            },
           );
-        }
-
-    );
-  }
-
-
-
-myItem(QueryDocumentSnapshot site) {
-    return ListTile(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceView(site))
-        );
+        },
+      )
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPlacePage()));
       },
-      trailing: const Icon(Icons.arrow_forward_ios, color: Colors.lightGreen,),
-      title: Text(site['lugar'], style: const TextStyle(fontSize: 20, color: Colors.lightGreen),),
-      subtitle: Text('${site['ciudad']}, ${site['departamento']}', style: const TextStyle(fontSize: 18),),
+      tooltip: 'New trip',
+    child: const Icon(Icons.add)
+      ),
     );
   }
 }

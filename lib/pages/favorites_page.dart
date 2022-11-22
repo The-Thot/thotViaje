@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import '../widgets/main_menu.dart';
 import 'place_view.dart';
 
+
+
 class Favorites extends StatefulWidget {
-  const Favorites({super.key});
+  const Favorites({Key? key}) : super(key: key);
+
 
   @override
   State<Favorites> createState() => _FavoritesState();
@@ -20,7 +23,7 @@ class _FavoritesState extends State<Favorites> {
     return Scaffold(
         appBar: myAppbar(),
         drawer: mainMenu(context),
-        body: favoritesBody()
+
     );
   }
 
@@ -33,31 +36,7 @@ class _FavoritesState extends State<Favorites> {
     );
   }
 
-  favoritesBody(){
-    return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("users")
-            .doc(FirebaseAuth.instance.currentUser?.uid)
-            .collection("sitios")
-            .snapshots(),
 
-        builder: (context, snapshot){
-          if(snapshot.hasError) {return const Text('Un Error Ha Ocurrido!',
-            style: TextStyle(fontSize: 18, color: Colors.lightGreen),);}
-          if(!snapshot.hasData) return const Text('Cargando Información');
-          return ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              itemCount: snapshot.data!.docs.length * 2,
-              itemBuilder: (context, index){
-                if(index.isOdd) return const Divider();
-                int indexsite = index ~/ 2;
-                QueryDocumentSnapshot site = snapshot.data!.docs[indexsite];
-                return myItem(site);
-              }
-          );
-        }
-    );
-  }
 
   myItem(QueryDocumentSnapshot site) {
     return ListTile(

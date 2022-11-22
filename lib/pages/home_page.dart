@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:thot/pages/favorites_page.dart';
+import 'package:thot/pages/place_view.dart';
+import 'package:thot/pages/places_list.dart';
 import '../users/user.dart';
 import '../Widgets/main_menu.dart';
 

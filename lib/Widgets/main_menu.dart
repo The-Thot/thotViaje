@@ -59,7 +59,7 @@ Widget mainMenu(BuildContext context) {
 
         ListTile(
           iconColor: Colors.lightGreen,
-          title: const Text('Mis Favoritos', style: TextStyle(fontSize: 15)),
+          title: const Text('Mis favoritos', style: TextStyle(fontSize: 15)),
           leading: const Icon(Icons.star),
           textColor: Colors.lightGreen,
           onTap: () {
